@@ -9,11 +9,11 @@ interface IProps {}
 export const App: React.FC<IProps> = () => {
   return (
     <div className={"App"}>
-      {/*<AddTradeForm />*/}
+      <AddTradeForm />
       {/*<br />*/}
       {/*<hr />*/}
       {/*<br />*/}
-      <AddCommentForm />
+      {/*<AddCommentForm />*/}
       {/*<br />*/}
       {/*<hr />*/}
       {/*<br />*/}
