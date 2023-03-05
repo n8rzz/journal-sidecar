@@ -1,6 +1,7 @@
 import {
   Button,
   Flex,
+  Grid,
   Group,
   NativeSelect,
   NumberInput,
@@ -13,7 +14,7 @@ import {
   TextInput,
 } from "@mantine/core";
 import { DatePickerInput, TimeInput } from "@mantine/dates";
-import { IconCalendar, IconClock } from "@tabler/icons-react";
+import { IconCalendar, IconClock, IconCurrencyDollar } from "@tabler/icons-react";
 import React, { useState } from "react";
 import { useInputState } from "@mantine/hooks";
 import { useForm } from "@mantine/form";
@@ -38,10 +39,11 @@ export const AddTradeForm: React.FC<IProps> = (props) => {
           Add Tade
         </Text>
 
-        <Flex align={"center"} justify={"space-between"} gap={2}>
-          <Group>
+        <Grid>
+          <Grid.Col span={4}>
             <DatePickerInput
               icon={<IconCalendar size="1rem" stroke={1.5} />}
+              label={"Date"}
               maw={300}
               mx={"auto"}
               name={"tradeDate"}
@@ -50,9 +52,11 @@ export const AddTradeForm: React.FC<IProps> = (props) => {
               withAsterisk={true}
               {...form.getInputProps("tradeDate")}
             />
-
+          </Grid.Col>
+          <Grid.Col span={4}>
             <TimeInput
               icon={<IconClock size="1rem" stroke={1.5} />}
+              label={"Time"}
               mx={"auto"}
               name={"tradeTime"}
               required={true}
@@ -60,71 +64,88 @@ export const AddTradeForm: React.FC<IProps> = (props) => {
               withSeconds={false}
               {...form.getInputProps("tradeTime")}
             />
-          </Group>
+          </Grid.Col>
+          <Grid.Col span={4}>
+            <Flex align={"center"} justify={"flex-start"} pt={"1.5rem"}>
+              <SegmentedControl
+                color={"cyan"}
+                data={[
+                  { label: "Long", value: "long" },
+                  { label: "Short", value: "short" },
+                ]}
+                name={"longOrShort"}
+                orientation={"horizontal"}
+                transitionTimingFunction={"linear"}
+                {...form.getInputProps("longOrShort")}
+              />
+            </Flex>
+          </Grid.Col>
+        </Grid>
 
-          <TextInput
-            name={"symbol"}
-            placeholder={"Symbol"}
-            required={true}
-            withAsterisk={true}
-            {...form.getInputProps("symbol")}
-          />
-        </Flex>
+        <Grid align={"center"} justify={"space-between"}>
+          <Grid.Col span={6}>
+            <TextInput
+              label={"Symbol"}
+              name={"symbol"}
+              placeholder={"Symbol"}
+              required={true}
+              withAsterisk={true}
+              {...form.getInputProps("symbol")}
+            />
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <TextInput
+              type={"number"}
+              label={"Price"}
+              name={"price"}
+              placeholder={"Price"}
+              required={true}
+              rightSection={<IconCurrencyDollar size={14} />}
+              rightSectionWidth={30}
+              {...form.getInputProps("price")}
+            />
+          </Grid.Col>
+        </Grid>
 
-        <SimpleGrid cols={3}>
-          <NumberInput
-            formatter={(value: string) => `${value}`}
-            hideControls={true}
-            name={"price"}
-            placeholder={"Price"}
-            required={true}
-            {...form.getInputProps("price")}
-          />
-
-          <SegmentedControl
-            color={"cyan"}
-            data={[
-              { label: "Long", value: "long" },
-              { label: "Short", value: "short" },
-            ]}
-            name={"longOrShort"}
-            transitionTimingFunction={"linear"}
-            {...form.getInputProps("longOrShort")}
-          />
-
-          <NativeSelect
-            data={["M1", "M2", "M5", "M10", "M15"]}
-            name={"timeframe"}
-            required={true}
-            withAsterisk={true}
-            {...form.getInputProps("timeframe")}
-          />
-        </SimpleGrid>
-
-        <SimpleGrid cols={3}>
-          <NumberInput
-            name={"qty"}
-            placeholder={"Qty"}
-            required={true}
-            {...form.getInputProps("qty")}
-          />
-
-          <NumberInput
-            hideControls={true}
-            name={"takeProfit"}
-            placeholder={"TP"}
-            required={true}
-            {...form.getInputProps("takeProfit")}
-          />
-
-          <NumberInput
-            hideControls={true}
-            name={"stopLoss"}
-            placeholder={"SL"}
-            required={true}
-            {...form.getInputProps("stopLoss")}
-          />
-        </SimpleGrid>
+        <Grid>
+          <Grid.Col span={3}>
+            <NativeSelect
+              data={["M1", "M2", "M5", "M10", "M15"]}
+              label={"Timeframe"}
+              name={"timeframe"}
+              required={true}
+              withAsterisk={true}
+              {...form.getInputProps("timeframe")}
+            />
+          </Grid.Col>
+          <Grid.Col span={3}>
+            <NumberInput
+              label={"Qty"}
+              name={"qty"}
+              placeholder={"Qty"}
+              required={true}
+              {...form.getInputProps("qty")}
+            />
+          </Grid.Col>
+          <Grid.Col span={3}>
+            <NumberInput
+              label={"TP"}
+              name={"takeProfit"}
+              placeholder={"TP"}
+              required={true}
+              {...form.getInputProps("takeProfit")}
+            />
+          </Grid.Col>
+          <Grid.Col span={3}>
+            <NumberInput
+              label={"SL"}
+              name={"stopLoss"}
+              placeholder={"SL"}
+              required={true}
+              {...form.getInputProps("stopLoss")}
+            />
+          </Grid.Col>
+        </Grid>
 
         <Stack align={"flex-end"} spacing={"xs"}>
           <Text c={"dimmed"} fz={"small"} fs={"italic"}>
@@ -132,18 +153,18 @@ export const AddTradeForm: React.FC<IProps> = (props) => {
           </Text>
         </Stack>
 
+        <TextInput
+          name={"chartLink"}
+          placeholder={"Chart Link"}
+          {...form.getInputProps("chartLink")}
+        />
+
         <Textarea
           autosize={true}
           maxRows={6}
           minRows={2}
           placeholder="Notes"
           {...form.getInputProps("notes")}
-        />
-
-        <TextInput
-          name={"chartLink"}
-          placeholder={"Chart Link"}
-          {...form.getInputProps("chartLink")}
         />
 
         <Space h={"sm"} />
