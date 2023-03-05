@@ -1,8 +1,8 @@
 import "./App.css";
 import React from "react";
-import { AddTradeForm } from "./add-trade-form/AddTradeForm";
-import { AddCommentForm } from "./add-comment-form/AddCommentForm";
-import { Trade } from "./trade/Trade";
+import { AddTradeForm } from "./components/add-trade-form/AddTradeForm";
+import { AddCommentForm } from "./components/add-comment-form/AddCommentForm";
+import { Trade } from "./components/trade/Trade";
 
 interface IProps {}
 
