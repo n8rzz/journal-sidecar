@@ -10,14 +10,14 @@ export const App: React.FC<IProps> = () => {
   return (
     <div className={"App"}>
       <AddTradeForm />
-      {/*<br />*/}
-      {/*<hr />*/}
-      {/*<br />*/}
-      {/*<AddCommentForm />*/}
-      {/*<br />*/}
-      {/*<hr />*/}
-      {/*<br />*/}
-      {/*<Trade />*/}
+      <br />
+      <hr />
+      <br />
+      <AddCommentForm />
+      <br />
+      <hr />
+      <br />
+      <Trade />
     </div>
   );
 };

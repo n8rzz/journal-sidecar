@@ -4,7 +4,7 @@ import { IAddCommentFormInitialValues } from "./AddCommentForm.types";
 export const buildAddCommentFormInitialValues = (): IAddCommentFormInitialValues => {
   return {
     chartLink: "",
-    noteDate: dayjs().format("H:m"),
+    noteDate: dayjs().format("HH:mm"),
     notes: "",
   };
 };
