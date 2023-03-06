@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Timeline } from "@mantine/core";
+import { Container, Stack, Timeline } from "@mantine/core";
 import { IconGitCommit, IconCurrencyDollar } from "@tabler/icons-react";
 import { TradeComment } from "./trade-comment/TradeComment";
 import { TradeSummary } from "./trade-summary/TradeSummary";
@@ -23,15 +23,15 @@ interface IProps {}
 export const Trade: React.FC<IProps> = () => {
   return (
     <Stack>
-      <TradeSummary {...propsMock} />
-      <Timeline active={1} bulletSize={24} lineWidth={2}>
-        <Timeline.Item bullet={<IconCurrencyDollar size={12} />} color={"blue"}>
+      <div style={{ marginBottom: "10px" }}>
+        <TradeSummary {...propsMock} />
+      </div>
+
+      <Timeline bulletSize={24} lineWidth={2}>
+        <Timeline.Item>
           <TradeComment />
         </Timeline.Item>
-        <Timeline.Item bullet={<IconGitCommit size={12} />} color={"cyan"}>
-          <TradeComment />
-        </Timeline.Item>
-        <Timeline.Item bullet={<IconGitCommit size={12} />}>
+        <Timeline.Item>
           <TradeComment />
         </Timeline.Item>
       </Timeline>

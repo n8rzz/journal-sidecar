@@ -7,7 +7,7 @@ interface IProps {}
 export const TradeComment: React.FC<IProps> = () => {
   return (
     <React.Fragment>
-      <Text color="dimmed" size="sm">
+      <Text color="dimmed" mb={5} size="sm">
         This is a space for a comment. It doesn't need to be a long comment. heck, there doesn't
         even need to be a comment, provided there is a chart link. cool huh?
       </Text>
@@ -16,7 +16,9 @@ export const TradeComment: React.FC<IProps> = () => {
           2 hours ago
         </Text>
         <Text color={"dimmed"} size="xs" mt={4}>
-          <Anchor href={"http//example.com/chart"}>http//example.com/chart</Anchor>
+          <Anchor href={"http//example.com/chart"}>
+            <Text size={"xs"}>http//example.com/chart</Text>
+          </Anchor>
         </Text>
       </Flex>
     </React.Fragment>

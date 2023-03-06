@@ -1,4 +1,4 @@
-import { Button, Text, Textarea, Space, SimpleGrid, Stack, TextInput } from "@mantine/core";
+import { Button, Text, Textarea, Space, SimpleGrid, Stack, TextInput, Grid } from "@mantine/core";
 import { TimeInput } from "@mantine/dates";
 import { IconClock } from "@tabler/icons-react";
 import React from "react";
@@ -31,6 +31,12 @@ export const AddCommentForm: React.FC<IProps> = () => {
       <Space h={"sm"} />
 
       <Stack>
+        <TextInput
+          name={"chartLink"}
+          placeholder={"Chart Link"}
+          {...form.getInputProps("chartLink")}
+        />
+
         <Textarea
           autosize={true}
           maxRows={6}
@@ -41,27 +47,25 @@ export const AddCommentForm: React.FC<IProps> = () => {
           {...form.getInputProps("notes")}
         />
 
-        <TextInput
-          name={"chartLink"}
-          placeholder={"Chart Link"}
-          {...form.getInputProps("chartLink")}
-        />
-
-        <SimpleGrid cols={2}>
-          <TimeInput
-            icon={<IconClock size="1rem" stroke={1.5} />}
-            mx="auto"
-            name={"noteDate"}
-            required={true}
-            withSeconds={false}
-            withAsterisk={true}
-            {...form.getInputProps("noteDate")}
-          />
-
-          <Button color={"cyan"} type={"submit"}>
-            Comment
-          </Button>
-        </SimpleGrid>
+        <Grid>
+          <Grid.Col span={4}>
+            <TimeInput
+              icon={<IconClock size="1rem" stroke={1.5} />}
+              mx="auto"
+              name={"noteDate"}
+              required={true}
+              withSeconds={false}
+              withAsterisk={true}
+              {...form.getInputProps("noteDate")}
+            />
+          </Grid.Col>
+          <Grid.Col span={5} />
+          <Grid.Col span={3}>
+            <Button color={"cyan"} type={"submit"}>
+              Comment
+            </Button>
+          </Grid.Col>
+        </Grid>
       </Stack>
     </form>
   );

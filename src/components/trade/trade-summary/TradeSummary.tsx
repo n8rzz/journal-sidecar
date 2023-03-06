@@ -1,6 +1,6 @@
 import React from "react";
 import dayjs from "dayjs";
-import { Anchor, Center, Flex, Stack, Text } from "@mantine/core";
+import { Anchor, Flex, Stack, Text } from "@mantine/core";
 
 interface IProps {
   chartLink?: string;
@@ -26,8 +26,9 @@ export const TradeSummary: React.FC<IProps> = (props) => {
         <Text color={"dimmed"}>{props.tradeTime}</Text>
         <Text>{formattedTradeDate}</Text>
       </Flex>
+      <Text>{props.notes}</Text>
       <Flex align={"center"} justify={"space-between"}>
-        <Text>
+        <Text color={"dimmed"} fs={"italic"} size={"sm"}>
           {longOrSHortSymbol} {props.timeframe}/{props.qty} {props.takeProfit}/{props.stopLoss} @
           {props.price}
         </Text>
@@ -37,7 +38,6 @@ export const TradeSummary: React.FC<IProps> = (props) => {
           </Anchor>
         </Text>
       </Flex>
-      <Text color={"dimmed"}>{props.notes}</Text>
     </Stack>
   );
 };
