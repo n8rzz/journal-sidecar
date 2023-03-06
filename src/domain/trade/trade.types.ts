@@ -1,5 +1,9 @@
-export interface IAddTradeFormValues {
+import { ITradeComment } from "../trade-comment/TradeComment.types";
+
+export interface ITradeSummary {
   chartLink: string;
+  comments: ITradeComment[];
+  id?: string;
   longOrShort: string;
   notes: string;
   price: number;

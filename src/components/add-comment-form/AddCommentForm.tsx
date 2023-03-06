@@ -3,22 +3,21 @@ import { TimeInput } from "@mantine/dates";
 import { IconClock } from "@tabler/icons-react";
 import React from "react";
 import { useForm } from "@mantine/form";
-import { IAddCommentFormInitialValues } from "./AddCommentForm.types";
-import { buildAddCommentFormInitialValues } from "./AddCommentForm.utils";
+import { ITradeComment } from "../../domain/trade-comment/TradeComment.types";
+import {
+  addCommentFormValidations,
+  buildAddCommentFormInitialValues,
+} from "./AddCommentForm.utils";
 
 interface IProps {}
 
 export const AddCommentForm: React.FC<IProps> = () => {
-  const form = useForm({
+  const form = useForm<ITradeComment>({
     initialValues: buildAddCommentFormInitialValues(),
-
-    validate: {
-      notes: (value: string) => value.length === 0,
-      noteDate: (value: string) => typeof value === undefined,
-    },
+    validate: addCommentFormValidations(),
   });
 
-  const onSubmit = (formValues: IAddCommentFormInitialValues) => {
+  const onSubmit = (formValues: ITradeComment) => {
     console.log(formValues);
   };
 
@@ -41,10 +40,10 @@ export const AddCommentForm: React.FC<IProps> = () => {
           autosize={true}
           maxRows={6}
           minRows={2}
-          name={"notes"}
-          placeholder="Notes"
+          name={"note"}
+          placeholder="Note"
           required={true}
-          {...form.getInputProps("notes")}
+          {...form.getInputProps("note")}
         />
 
         <Grid>

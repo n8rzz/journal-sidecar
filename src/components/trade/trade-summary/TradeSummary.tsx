@@ -1,6 +1,6 @@
 import React from "react";
 import dayjs from "dayjs";
-import { Anchor, Flex, Stack, Text } from "@mantine/core";
+import { Anchor, Container, Flex, Stack, Text } from "@mantine/core";
 
 interface IProps {
   chartLink?: string;
@@ -19,25 +19,30 @@ interface IProps {
 export const TradeSummary: React.FC<IProps> = (props) => {
   const formattedTradeDate = dayjs(props.tradeDate).format("ddd MMM D, YYYY");
   const longOrSHortSymbol = props.longOrShort === "long" ? "L" : "S";
+  const tradeString = `${longOrSHortSymbol} ${props.timeframe}/${props.qty} ${props.takeProfit}/${props.stopLoss}@${props.price}`;
 
   return (
     <Stack>
       <Flex align={"center"} justify={"space-between"}>
-        <Text color={"dimmed"}>{props.tradeTime}</Text>
-        <Text>{formattedTradeDate}</Text>
-      </Flex>
-      <Text>{props.notes}</Text>
-      <Flex align={"center"} justify={"space-between"}>
-        <Text color={"dimmed"} fs={"italic"} size={"sm"}>
-          {longOrSHortSymbol} {props.timeframe}/{props.qty} {props.takeProfit}/{props.stopLoss} @
-          {props.price}
-        </Text>
-        <Text>
+        <Stack spacing={"s"}>
+          <Text>{props.tradeTime}</Text>
+          <Text color={"dimmed"}>{formattedTradeDate}</Text>
+        </Stack>
+
+        <Stack spacing={"xs"}>
           <Anchor href={props.chartLink} target={"_blank"}>
-            {props.chartLink}
+            <Text color={"orange"} size={"xs"}>
+              {props.chartLink}
+            </Text>
           </Anchor>
-        </Text>
+
+          <Text color={"dimmed"} fs={"italic"} size={"sm"}>
+            {tradeString}
+          </Text>
+        </Stack>
       </Flex>
+
+      <Text>{props.notes}</Text>
     </Stack>
   );
 };

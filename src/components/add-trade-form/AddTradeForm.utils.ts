@@ -1,7 +1,7 @@
-import { IAddTradeFormValues } from "./AddTradeForm.types";
 import dayjs from "dayjs";
+import { ITradeSummary } from "../../domain/trade/trade.types";
 
-export const buildAddTradeFormInitialValues = (): IAddTradeFormValues => {
+export const buildAddTradeFormInitialValues = (): ITradeSummary => {
   return {
     chartLink: "",
     longOrShort: "long",

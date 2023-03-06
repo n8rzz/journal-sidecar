@@ -1,12 +1,11 @@
+import React from "react";
 import {
   Button,
   Flex,
   Grid,
-  Group,
   NativeSelect,
   NumberInput,
   SegmentedControl,
-  SimpleGrid,
   Space,
   Stack,
   Text,
@@ -15,20 +14,19 @@ import {
 } from "@mantine/core";
 import { DatePickerInput, TimeInput } from "@mantine/dates";
 import { IconCalendar, IconClock, IconCurrencyDollar } from "@tabler/icons-react";
-import React, { useState } from "react";
-import { useInputState } from "@mantine/hooks";
 import { useForm } from "@mantine/form";
-import { IAddTradeFormValues } from "./AddTradeForm.types";
 import { buildAddTradeFormInitialValues } from "./AddTradeForm.utils";
+import { ITradeSummary } from "../../domain/trade/trade.types";
+import { IAddTradeForm } from "./AddTradeForm.type";
 
 interface IProps {}
 
 export const AddTradeForm: React.FC<IProps> = (props) => {
-  const form = useForm({
+  const form = useForm<IAddTradeForm>({
     initialValues: buildAddTradeFormInitialValues(),
   });
 
-  const onSubmit = (formValues: IAddTradeFormValues) => {
+  const onSubmit = (formValues: IAddTradeForm) => {
     console.log("---", formValues);
   };
 

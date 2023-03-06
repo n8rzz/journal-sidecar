@@ -1,10 +1,15 @@
 import dayjs from "dayjs";
-import { IAddCommentFormInitialValues } from "./AddCommentForm.types";
+import { ITradeComment } from "../../domain/trade-comment/TradeComment.types";
 
-export const buildAddCommentFormInitialValues = (): IAddCommentFormInitialValues => {
+export const buildAddCommentFormInitialValues = (): ITradeComment => {
   return {
     chartLink: "",
     noteDate: dayjs().format("HH:mm"),
-    notes: "",
+    note: "",
   };
 };
+
+export const addCommentFormValidations = () => ({
+  note: (value: string) => value.length === 0,
+  noteDate: (value: string) => typeof value === undefined,
+});

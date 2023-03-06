@@ -1,39 +1,25 @@
 import React from "react";
-import { Container, Stack, Timeline } from "@mantine/core";
-import { IconGitCommit, IconCurrencyDollar } from "@tabler/icons-react";
+import { Stack, Timeline } from "@mantine/core";
 import { TradeComment } from "./trade-comment/TradeComment";
 import { TradeSummary } from "./trade-summary/TradeSummary";
+import { ITradeSummary } from "../../domain/trade/trade.types";
+import { ITradeComment } from "../../domain/trade-comment/TradeComment.types";
 
-const propsMock = {
-  chartLink: "https://exampe.com/chart",
-  longOrShort: "long",
-  notes: "This is a trade note",
-  price: 4000.25,
-  qty: 1,
-  stopLoss: 12,
-  symbol: "MESH2023",
-  takeProfit: 30,
-  timeframe: "M1",
-  tradeDate: new Date("2023-03-05T19:11:41.529Z"),
-  tradeTime: "13:11",
-};
+interface IProps {
+  tradeSummary: ITradeSummary;
+}
 
-interface IProps {}
-
-export const Trade: React.FC<IProps> = () => {
+export const Trade: React.FC<IProps> = (props) => {
   return (
-    <Stack>
-      <div style={{ marginBottom: "10px" }}>
-        <TradeSummary {...propsMock} />
-      </div>
+    <Stack spacing={"md"}>
+      <TradeSummary {...props.tradeSummary} />
 
       <Timeline bulletSize={24} lineWidth={2}>
-        <Timeline.Item>
-          <TradeComment />
-        </Timeline.Item>
-        <Timeline.Item>
-          <TradeComment />
-        </Timeline.Item>
+        {props.tradeSummary.comments.map((comment: ITradeComment, index: number) => (
+          <Timeline.Item key={comment.note.replace(" ", "-")}>
+            <TradeComment {...comment} />
+          </Timeline.Item>
+        ))}
       </Timeline>
     </Stack>
   );

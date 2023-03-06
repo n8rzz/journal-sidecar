@@ -1,23 +1,28 @@
-import { Anchor, Flex, Text } from "@mantine/core";
-import { IconGitBranch } from "@tabler/icons-react";
 import React from "react";
+import { Anchor, Flex, Text } from "@mantine/core";
+import RelativeTime from "dayjs/plugin/relativeTime";
+import dayjs from "dayjs";
+import { ITradeComment } from "../../../domain/trade-comment/TradeComment.types";
 
-interface IProps {}
+dayjs.extend(RelativeTime);
 
-export const TradeComment: React.FC<IProps> = () => {
+interface IProps extends ITradeComment {}
+
+export const TradeComment: React.FC<IProps> = (props) => {
+  const formattedTradeDate = dayjs().to(props.commentDate);
+
   return (
     <React.Fragment>
       <Text color="dimmed" mb={5} size="sm">
-        This is a space for a comment. It doesn't need to be a long comment. heck, there doesn't
-        even need to be a comment, provided there is a chart link. cool huh?
+        {props.note}
       </Text>
       <Flex align={"center"} justify={"space-between"}>
         <Text size="xs" mt={4}>
-          2 hours ago
+          {formattedTradeDate}
         </Text>
         <Text color={"dimmed"} size="xs" mt={4}>
-          <Anchor href={"http//example.com/chart"}>
-            <Text size={"xs"}>http//example.com/chart</Text>
+          <Anchor href={props.chartLink}>
+            <Text size={"xs"}>{props.chartLink}</Text>
           </Anchor>
         </Text>
       </Flex>
